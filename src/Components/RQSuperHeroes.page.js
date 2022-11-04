@@ -1,9 +1,6 @@
-import { useQuery } from "react-query"
-import axios from "axios"
+import { useSuperHerosData } from "../hooks/useSuperHerosData.js"
 
-const fetchData = () => {
-    return axios.get('http://localhost:4000/superheroes')
-}
+
 export const RQSuperHeroes = () => {
    
    const onSuccess = () => {
@@ -15,12 +12,7 @@ export const RQSuperHeroes = () => {
    }
 
  
-   const{ isLoading, data, isError , error , isFetching, refetch } = useQuery("super-heros",fetchData,
-   {
-    enabled:false,
-    onError,
-    onSuccess,
-   })
+   const{ isLoading, data, isError , error , isFetching, refetch } = useSuperHerosData(onError,onSuccess)
 
     console.log({isLoading,isFetching})
     if(isLoading || isFetching){
